@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validação de formulários</title>
+
+  <script>
+    function validate(el) {
+      if (el.value.length === 6 && el.value === '60000') el.setCustomValidity('O campos está com CEP default')
+    }
+  </script>
+</head>
+<body>
+
+  <form action="" >
+
+    <input 
+      type="text" 
+      id="teste"
+      onchange="console.log('change')" 
+      oninput="validate(this)"
+    />
+
+
+    <input type="submit" value="salvar" formnovalidate>
+    <input type="submit" value="finalizar">
+
+  </form>
+  
+</body>
+</html>
