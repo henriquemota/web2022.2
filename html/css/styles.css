@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&display=swap');
+
+* {
+  font-family: 'Reem Kufi Ink', sans-serif;
+}
+body {
+  background-color: brown;
+  background-image: url('https://http2.mlstatic.com/D_NQ_NP_632786-MLB42184673363_062020-W.jpg');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+p {
+  font-size: 12px;
+  font-weight: 800;
+  color: blueviolet;
+}
+h1 + p {
+  font-size: 24px;
+  color: chocolate;
+}
+div {
+  border-radius: 24px;
+  border-width: 5px;
+  border-style: dashed;
+  padding: 8px;
+}
