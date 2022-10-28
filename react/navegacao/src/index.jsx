@@ -7,19 +7,19 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-d
 import Layout from './layout'
 import CEP from './pages/cep'
 import Home from './pages/home'
-import { Post, PostList } from './pages/posts'
+import { Post, PostForm, PostList } from './pages/posts'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/' element={<Navigate to="/home" replace />} />
-          <Route path='home' element={<Home />} />
+          <Route path='/' element={<Navigate to="/home" />} />
+          <Route path='home' index element={<Home />} />
           <Route path="cep" element={<CEP />} />
           <Route path="posts" element={<PostList />}>
             <Route path=":id" element={<Post />} />
-            <Route path="new" element={<Post />} />
+            <Route path="new" element={<PostForm />} />
           </Route>
         </Route>
       </Routes>

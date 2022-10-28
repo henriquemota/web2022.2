@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function CEP() {
   const defaultAddress = { address: '', district: '', state: '', lat: '', lng: '' }
@@ -58,9 +57,6 @@ export default function CEP() {
             </code>
           </fieldset>
         )}
-
-        <Link to='/' className='btn btn-secondary my-5'>Home</Link>
-
       </div>
     </main>
   )
