@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Link, useRoutes } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { BASE_URL } from '../constants'
 
 function PostList() {
@@ -79,15 +79,24 @@ function PostForm() {
 }
 
 function Post() {
-  const route = useRoutes()
-  const { id } = route.params
+  const [post, setPost] = useState({})
+  const { id } = useParams()
 
   useEffect(() => {
-    console.log(id)
+    if (id)
+      axios
+        .get(`${BASE_URL}/posts/${id}`)
+        .then(({ data }) => setPost(data))
+        .catch(err => alert(err))
+
   }, [id])
 
   return (
-    <h1>Post</h1>
+    <section className='container'>
+      <h1 className='my-5'>Post - {post.title}</h1>
+      <p className='my-5'>{post.body}</p>
+      <Link className='' to='/posts'>voltar</Link>
+    </section>
   )
 }
 export { PostList, PostForm, Post }

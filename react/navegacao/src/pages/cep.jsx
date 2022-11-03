@@ -8,7 +8,7 @@ export default function CEP() {
 
   async function getAddress() {
     const { data, status } = await axios.get(`https://cep.awesomeapi.com.br/json/${cep}`)
-    status === 200 ? setEndereco(data) : setEndereco(defaultData)
+    status === 200 ? setEndereco(data) : setEndereco(defaultAddress)
   }
 
   return (
