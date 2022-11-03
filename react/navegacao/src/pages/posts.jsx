@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { BASE_URL } from '../constants'
+import { FIREBASE_URL } from '../constants'
 
 function PostList() {
   const [loading, setLoading] = useState(false)
@@ -10,8 +10,17 @@ function PostList() {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`${BASE_URL}/posts`)
-      .then(({ data, status }) => status === 200 ? setPosts(data) : setPosts([]))
+      // .get(`${BASE_URL}/posts`)
+      // .then(({ data, status }) => status === 200 ? setPosts(data) : setPosts([]))
+      .get(`${FIREBASE_URL}/posts.json`)
+      .then(({ data, status }) => {
+        if (status === 200) {
+          const p = Object
+            .entries(data)
+            .map(([key, value]) => { return { ...value, id: key } })
+          setPosts(p)
+        } else setPosts([])
+      })
       .catch((err) => alert(err))
       .finally(() => setLoading(false))
   }, [])
@@ -28,7 +37,7 @@ function PostList() {
             </th>
           </tr>
           <tr>
-            <th>id</th>
+            {/* <th>id</th> */}
             <th>title</th>
             <th>post</th>
           </tr>
@@ -37,7 +46,7 @@ function PostList() {
           {posts.map((el, ix) => {
             return (
               <tr key={ix}>
-                <td><Link to={`/posts/${el.id}`}>{el.id}</Link></td>
+                {/* <td><Link to={`/posts/${el.id}`}>{el.id}</Link></td> */}
                 <td><Link to={`/posts/${el.id}`}>{el.title}</Link></td>
                 <td><Link to={`/posts/${el.id}`}>{el.body}</Link></td>
               </tr>
@@ -57,8 +66,10 @@ function PostForm() {
     e.preventDefault()
     setLoading(true)
     axios
-      .post(`${BASE_URL}/posts`, form)
-      .then(({ status, data }) => status === 201 && alert(`Operação realizada com sucesso. ID: ${data.id}`))
+      // .post(`${BASEURL}/posts`, form)
+      // .then(({ status, data }) => status === 201 && alert(`Operação realizada com sucesso. ID: ${data.id}`))
+      .post(`${FIREBASE_URL}/posts.json`, form)
+      .then(({ status, data }) => alert(`Operação realizada com sucesso.`))
       .catch((err) => alert(err))
       .finally(setLoading(false))
   }
@@ -85,10 +96,9 @@ function Post() {
   useEffect(() => {
     if (id)
       axios
-        .get(`${BASE_URL}/posts/${id}`)
+        .get(`${FIREBASE_URL}/posts/${id}.json`)
         .then(({ data }) => setPost(data))
         .catch(err => alert(err))
-
   }, [id])
 
   return (
