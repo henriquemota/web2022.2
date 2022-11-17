@@ -1,20 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+include_once('frutas.php');
+include_once('pessoas.php');
 
-$frutas = [
-    'maça',
-    'banana',
-    'abacaxi',
-    'melão',
-    'mamão',
-];
+$tipo = $_GET['tipo'];
 
-$pessoas = [
-  array("nome"=>'joao', "idade"=>35,),
-  array("nome"=>'maria', "idade"=>30,),
-  array("nome"=>'pedro', "idade"=>22,),
-];
-
-// echo json_encode($frutas);
-echo json_encode($pessoas);
+switch ($tipo) {
+  case 'pessoas':
+    echo json_encode($pessoas);
+    break;
+  case 'frutas':
+    echo json_encode($frutas);
+    break;
+  default:
+    echo json_encode([]);
+    break;
+}
 ?>
